@@ -22,6 +22,12 @@ Typical wiring:
 - Transceiver A/B -> BLD-510x RS-485 A/B
 - Common ground between controller and driver, unless your interface is intentionally isolated
 
+RS-485 transceiver option:
+
+- [SparkFun Transceiver Breakout - RS-485](https://www.sparkfun.com/sparkfun-transceiver-breakout-rs-485.html)
+
+Any equivalent half-duplex RS-485 transceiver should work if it exposes UART RX/TX plus driver/receiver enable control pins compatible with your microcontroller voltage.
+
 Initialize the serial object in your sketch before calling `motor.begin()`. Default driver serial settings are:
 
 - 9600 baud
