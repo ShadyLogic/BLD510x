@@ -40,20 +40,21 @@ public:
     /**
      * @brief Creates a BLD-510x driver instance.
      *
-     * @param serial Hardware serial port connected to the RS-485 transceiver.
+     * @param serial Stream connected to the RS-485 transceiver. The sketch must
+     * call begin() on the serial object before using this driver.
      * @param deRePin Digital pin controlling the transceiver DE/RE direction.
      * @param slaveAddress Initial Modbus slave address, valid range 1-250.
      */
-    BLD510x(HardwareSerial &serial, uint8_t deRePin, uint8_t slaveAddress = 1);
+    BLD510x(Stream &serial, uint8_t deRePin, uint8_t slaveAddress = 1);
 
     /**
-     * @brief Initializes the RS-485 direction pin and serial port.
+     * @brief Initializes the RS-485 direction pin.
      *
-     * The BLD-510B manual specifies 8 data bits, no parity, and 1 stop bit.
-     *
-     * @param baud Serial baud rate. Defaults to 9600.
+     * The sketch is responsible for initializing the serial object passed to
+     * the constructor. For hardware serial, use settings compatible with the
+     * driver, typically 9600 baud, 8 data bits, no parity, and 1 stop bit.
      */
-    void begin(uint32_t baud = 9600);
+    void begin();
 
     /**
      * @brief Sets the local Modbus target address used for future commands.
@@ -279,7 +280,7 @@ public:
     float getMaxRPM() const;
 
 private:
-    HardwareSerial *_serial;
+    Stream *_serial;
     Stream *_debugStream;
     float _maxRPM = 7000.0f;
     uint32_t _responseTimeoutMs;

@@ -5,14 +5,14 @@ Arduino / Teensy RS-485 Modbus RTU driver for StepperOnline BLD-510B and BLD-510
 ## Features
 
 - Supports StepperOnline BLD-510B and BLD-510S drivers.
-- Uses Modbus RTU over RS-485 with Arduino `HardwareSerial`.
+- Uses Modbus RTU over RS-485 with any Arduino `Stream` object, including hardware serial and software serial.
 - Handles the BLD-510x speed-register byte-order quirk from the manual examples.
 - Supports run, stop, braking stop, direction, speed, acceleration/deceleration, speed feedback, address selection, and fault reads.
 - Optional TX/RX frame logging for bring-up and troubleshooting.
 
 ## Hardware
 
-You need an RS-485 transceiver between the microcontroller UART and the motor driver. Pass the transceiver DE/RE direction-control pin to the constructor.
+You need an RS-485 transceiver between the microcontroller serial port and the motor driver. Pass the serial object and transceiver DE/RE direction-control pin to the constructor.
 
 Typical wiring:
 
@@ -22,7 +22,7 @@ Typical wiring:
 - Transceiver A/B -> BLD-510x RS-485 A/B
 - Common ground between controller and driver, unless your interface is intentionally isolated
 
-Default serial settings are:
+Initialize the serial object in your sketch before calling `motor.begin()`. Default driver serial settings are:
 
 - 9600 baud
 - 8 data bits
@@ -69,7 +69,8 @@ void setup()
 {
     Serial.begin(115200);
 
-    motor.begin(9600);
+    Serial1.begin(9600, SERIAL_8N1);
+    motor.begin();
     motor.setResponseTimeout(150);
     motor.setPolePairs(2);
     motor.setMaxRPM(7000.0f);

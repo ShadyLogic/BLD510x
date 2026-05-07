@@ -120,7 +120,8 @@ void setup()
     Serial.println();
     Serial.println("BLD-510x RS-485 example");
 
-    motor.begin(MOTOR_BAUD);
+    Serial1.begin(MOTOR_BAUD, SERIAL_8N1);
+    motor.begin();
     motor.setResponseTimeout(RESPONSE_TIMEOUT_MS);
 
     // Uncomment this line when you want to see every Modbus TX/RX frame.

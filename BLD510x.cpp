@@ -1,6 +1,6 @@
 #include "BLD510x.h"
 
-BLD510x::BLD510x(HardwareSerial &serial, uint8_t deRePin, uint8_t slaveAddress)
+BLD510x::BLD510x(Stream &serial, uint8_t deRePin, uint8_t slaveAddress)
 {
     _serial = &serial;
     _debugStream = nullptr;
@@ -11,12 +11,10 @@ BLD510x::BLD510x(HardwareSerial &serial, uint8_t deRePin, uint8_t slaveAddress)
     _responseTimeoutMs = 100;
 }
 
-void BLD510x::begin(uint32_t baud)
+void BLD510x::begin()
 {
     pinMode(_deRePin, OUTPUT);
     setTransmit(false);
-
-    _serial->begin(baud, SERIAL_8N1);
 }
 
 bool BLD510x::setAddress(uint8_t address)
