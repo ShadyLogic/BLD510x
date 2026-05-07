@@ -1,0 +1,26 @@
+name: Compile Examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  arduino-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: Install Teensy platform
+        run: |
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls https://www.pjrc.com/teensy/package_teensy_index.json
+          arduino-cli core update-index
+          arduino-cli core install teensy:avr
+
+      - name: Compile BLD510x example
+        run: arduino-cli compile --fqbn teensy:avr:teensy41 --library . examples/BLD510x_example

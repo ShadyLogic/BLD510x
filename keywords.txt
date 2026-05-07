@@ -1,0 +1,54 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+BLD510x	                    KEYWORD1
+Direction	                KEYWORD1
+Fault	                    KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	                    KEYWORD2
+setAddress	                KEYWORD2
+useAddress	                KEYWORD2
+writeDeviceAddress	        KEYWORD2
+setPolePairs	            KEYWORD2
+setResponseTimeout	        KEYWORD2
+setDebugStream	            KEYWORD2
+enable	                    KEYWORD2
+stop	                    KEYWORD2
+brake	                    KEYWORD2
+setSpeed	                KEYWORD2
+setSpeedRpm	                KEYWORD2
+setAccelerationDeceleration KEYWORD2
+readActualSpeedRaw	        KEYWORD2
+readActualSpeedRpm	        KEYWORD2
+readFault	                KEYWORD2
+clearAlarmByStop	        KEYWORD2
+forward	                    KEYWORD2
+reverse	                    KEYWORD2
+runRPM	                    KEYWORD2
+setRPM	                    KEYWORD2
+coast	                    KEYWORD2
+emergencyBrake	            KEYWORD2
+getRPM	                    KEYWORD2
+hasFault	                KEYWORD2
+printFault	                KEYWORD2
+setMaxRPM	                KEYWORD2
+getMaxRPM	                KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+Forward	                    LITERAL1
+Reverse	                    LITERAL1
+FaultNone	                LITERAL1
+FaultLockedRotor	        LITERAL1
+FaultOverCurrent	        LITERAL1
+FaultHallAbnormal	        LITERAL1
+FaultBusVoltageLow	        LITERAL1
+FaultBusVoltageHigh	        LITERAL1
+FaultCurrentPeakAlarm	    LITERAL1

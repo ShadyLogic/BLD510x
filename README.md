@@ -14,12 +14,47 @@ Arduino / Teensy RS-485 Modbus RTU driver for StepperOnline BLD-510B and BLD-510
 
 You need an RS-485 transceiver between the microcontroller UART and the motor driver. Pass the transceiver DE/RE direction-control pin to the constructor.
 
+Typical wiring:
+
+- MCU TX -> RS-485 transceiver DI
+- MCU RX -> RS-485 transceiver RO
+- MCU direction pin -> transceiver DE and /RE control
+- Transceiver A/B -> BLD-510x RS-485 A/B
+- Common ground between controller and driver, unless your interface is intentionally isolated
+
 Default serial settings are:
 
 - 9600 baud
 - 8 data bits
 - no parity
 - 1 stop bit
+
+## Installation
+
+### Arduino IDE
+
+Clone or download this repository into your Arduino libraries folder:
+
+```text
+Documents/Arduino/libraries/BLD510x
+```
+
+Restart the Arduino IDE, then open:
+
+```text
+File > Examples > BLD510x > BLD510x_example
+```
+
+### PlatformIO
+
+Use the repository as a library dependency:
+
+```ini
+lib_deps =
+    https://github.com/ShadyLogic/BLD510x.git
+```
+
+Or copy this repository into your project's `lib/BLD510x` folder.
 
 ## Basic Usage
 
@@ -67,6 +102,8 @@ void loop()
 
 The BLD-510B and BLD-510S use the same Modbus command structure for the functions implemented by this library.
 
+Supported commands/registers include control, speed setting, acceleration/deceleration, driver address, actual speed feedback, and fault state.
+
 ## Debugging
 
 Enable frame logging when wiring or verifying RS-485 communication:
@@ -79,7 +116,7 @@ This prints transmitted and received Modbus frames in hex.
 
 ## Examples
 
-See [`examples/BLD510x_example.cpp`](examples/BLD510x_example.cpp) for a fuller bring-up sketch that demonstrates:
+See [`examples/BLD510x_example/BLD510x_example.ino`](examples/BLD510x_example/BLD510x_example.ino) for a fuller bring-up sketch that demonstrates:
 
 - setup command checks
 - response timeout configuration
@@ -94,6 +131,17 @@ See [`examples/BLD510x_example.cpp`](examples/BLD510x_example.cpp) for a fuller 
 ## Notes
 
 The speed command register is intentionally written with little-endian value bytes because the BLD-510B and BLD-510S manual examples show values such as 1000 RPM as `E8 03` and 1500 RPM as `DC 05`. Register addresses and CRC bytes still follow normal Modbus RTU ordering.
+
+## Safety
+
+Test unloaded first. Verify motor direction, stop/brake behavior, fault handling, and any external emergency-stop hardware before attaching the motor to mechanics. A serial command or wiring mistake can start motion unexpectedly.
+
+## References
+
+- [BLD-510B product page](https://www.omc-stepperonline.com/digital-brushless-dc-motor-driver-12v-48vdc-max-15-0a-400w-bld-510b)
+- [BLD-510S product page](https://www.stepperonline.ca/digital-brushless-dc-motor-driver-18v-50vdc-max-10a-200w-bld-510s.html)
+- [BLD-510B manual mirror](https://www.manualslib.com/manual/3533809/Stepperonline-Bld-510b.html)
+- [BLD-510S manual mirror](https://www.manualslib.com/manual/3284533/Stepperonline-Bld-510s.html)
 
 ## License
 

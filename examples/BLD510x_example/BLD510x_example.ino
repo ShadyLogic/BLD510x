@@ -1,4 +1,4 @@
-#include "BLD510x.h"
+#include <BLD510x.h>
 
 constexpr uint8_t RS485_DE_RE_PIN = 2; // Change to match your RS-485 DE/RE wiring.
 constexpr uint8_t MOTOR_ADDRESS = 1;
