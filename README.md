@@ -1,6 +1,6 @@
 # BLD510x
 
-Arduino / Teensy RS-485 Modbus RTU driver for StepperOnline BLD-510B and BLD-510S BLDC motor controllers.
+Arduino RS-485 Modbus RTU driver for StepperOnline BLD-510B and BLD-510S BLDC motor controllers.
 
 ## Features
 
